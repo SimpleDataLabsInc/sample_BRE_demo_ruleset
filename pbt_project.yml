@@ -1,6 +1,6 @@
 name: Sample_BRE_Demo_Ruleset
 description: Ruleset that contains business rule to be applied in Sample_BRE_Demo.
-version: '1.5'
+version: '1.6'
 author: nathan+demo2@prophecy.io
 language: python
 buildSystem: ''
