@@ -14,9 +14,10 @@ def PromoCodeRule(
         .when(((spending > lit(500)) & (is_recent_order == lit(1))), lit("Buy one get one free"))\
         .when((spending > lit(500)), lit("15% discount"))\
         .when((spending > lit(300)), lit("10% Discount"))\
+        .when((spending > lit(100)), lit("5% Discount"))\
         .when(
           ((last_purchase_date >= lit("2024-12-01")) & (last_purchase_date <= lit("2024-12-31"))),
           lit("Free two-day shipping")
         )\
-        .otherwise(lit("5% Discount"))\
+        .otherwise(lit("No Discount"))\
         .alias("promo_offer")
