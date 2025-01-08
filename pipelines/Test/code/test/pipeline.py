@@ -4,9 +4,12 @@ from pyspark.sql.types import *
 from test.config.ConfigStore import *
 from test.functions import *
 from prophecy.utils import *
+from test.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_sample_customer_data = sample_customer_data(spark)
+    df_reformatted_customer_data = reformatted_customer_data(spark, df_sample_customer_data)
+    df_SchemaTransform_1 = SchemaTransform_1(spark, df_reformatted_customer_data)
 
 def main():
     spark = SparkSession.builder\

@@ -27,7 +27,7 @@
       "isNullValuesInUnitTestsEnabled" : true
     },
     "language" : "python",
-    "fabricId" : "14560",
+    "fabricId" : "13781",
     "frontEndLanguage" : "sql",
     "mode" : "batch",
     "udfs" : {
@@ -80,8 +80,374 @@
     "topLevelPackage" : "test",
     "configurationVersion" : "v2"
   },
-  "connections" : [ ],
-  "processes" : { },
+  "connections" : [ {
+    "id" : "4O58eblgFof2fJ5hN1XSD$$fpZG191F097QQ6_7MR-Hj",
+    "source" : "nasAwGwJK_9uTH1cLNl65$$AZTkMny4hn7v0mta-Z5X6",
+    "sourcePort" : "D5xQ9K1iumprVopNndIHa$$hOr0fGpavr-dD-SvAKjV4",
+    "target" : "huJYuUI1EHAdaWcS6N1Lx$$VV4i5fPgAC0g-IKLxZYaG",
+    "targetPort" : "8GWpvp1xXt67vqqeZsVGd$$NzH7xcoc7rl55Owse_LP6"
+  }, {
+    "id" : "rt5emkMr1UIFpY44nFeRU$$wYgb1UnlIjP6IatzEwCEi",
+    "source" : "huJYuUI1EHAdaWcS6N1Lx$$VV4i5fPgAC0g-IKLxZYaG",
+    "sourcePort" : "Hb7FQ4kys4yelL7L7S-OO$$48cNrPr99C3gLEhr06dC6",
+    "target" : "x9tQlGnivlYAq40TLZ8VF$$hzaIw0uC24lo0mB2PjC7R",
+    "targetPort" : "0g97LOgpQMnEkqazTnaTC$$-G5c1KzU7TLQgzKUeA72A"
+  } ],
+  "processes" : {
+    "nasAwGwJK_9uTH1cLNl65$$AZTkMny4hn7v0mta-Z5X6" : {
+      "id" : "nasAwGwJK_9uTH1cLNl65$$AZTkMny4hn7v0mta-Z5X6",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "sample_customer_data",
+        "slug" : "sample_customer_data",
+        "x" : -280,
+        "y" : -200,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "comment" : "Generates a sample dataset of customer transactions for analysis, including details on spending and purchase history.",
+        "autoUpdateComment" : true
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "D5xQ9K1iumprVopNndIHa$$hOr0fGpavr-dD-SvAKjV4",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "customer_id",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "order_id",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "spending",
+              "type" : "double",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "last_purchase_date",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "high_value_flag",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
+      },
+      "properties" : {
+        "script" : "from pyspark.sql import Row\n\n# Sample data creation\ndata = [\n    Row(customer_id=1, order_id=101, spending=800.0, last_purchase_date=\"2023-10-01\", high_value_flag=1),\n    Row(customer_id=2, order_id=102, spending=800.0, last_purchase_date=\"2023-09-15\", high_value_flag=0),\n    Row(customer_id=3, order_id=103, spending=600.0, last_purchase_date=\"2025-01-01\", high_value_flag=1),\n    Row(customer_id=4, order_id=104, spending=400.0, last_purchase_date=\"2023-10-05\", high_value_flag=0),\n    Row(customer_id=5, order_id=105, spending=200.0, last_purchase_date=\"2025-01-02\", high_value_flag=1),\n    Row(customer_id=6, order_id=106, spending=180.0, last_purchase_date=\"2024-12-04\", high_value_flag=0)\n]\n\n# Create DataFrame\ndf = spark.createDataFrame(data)\n\n# Sample 10 rows\nout0 = df.limit(10)",
+        "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+        "scriptMethodFooter" : "    return out0"
+      }
+    },
+    "huJYuUI1EHAdaWcS6N1Lx$$VV4i5fPgAC0g-IKLxZYaG" : {
+      "id" : "huJYuUI1EHAdaWcS6N1Lx$$VV4i5fPgAC0g-IKLxZYaG",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "reformatted_customer_data",
+        "slug" : "reformatted_customer_data",
+        "x" : -120,
+        "y" : -200,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "comment" : "Transforms customer data to highlight recent purchases and identify high-value customers.",
+        "autoUpdateComment" : true
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "8GWpvp1xXt67vqqeZsVGd$$NzH7xcoc7rl55Owse_LP6",
+          "slug" : "sample_customer_data",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "customer_id",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "order_id",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "spending",
+              "type" : "double",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "last_purchase_date",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "high_value_flag",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Hb7FQ4kys4yelL7L7S-OO$$48cNrPr99C3gLEhr06dC6",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "importLanguage" : "${$.workflow.metainfo.frontEndLanguage}",
+        "expressions" : [ {
+          "target" : "customer_id",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "customer_id"
+          },
+          "description" : ""
+        }, {
+          "target" : "order_id",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "order_id"
+          },
+          "description" : ""
+        }, {
+          "target" : "spending",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "cast(spending as long)"
+          },
+          "description" : ""
+        }, {
+          "target" : "last_purchase_date",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "cast(last_purchase_date as date)"
+          },
+          "description" : ""
+        }, {
+          "target" : "high_value_flag",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "cast(high_value_flag as integer)"
+          },
+          "description" : ""
+        }, {
+          "target" : "is_recent_order",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "CASE WHEN (datediff(current_date(), to_date(last_purchase_date)) <= 30) THEN 1 ELSE 0 END"
+          },
+          "description" : ""
+        } ],
+        "importString" : "",
+        "activeTab" : "expressions",
+        "columnsSelector" : [ "8GWpvp1xXt67vqqeZsVGd$$NzH7xcoc7rl55Owse_LP6##order_id", "8GWpvp1xXt67vqqeZsVGd$$NzH7xcoc7rl55Owse_LP6##high_value_flag", "8GWpvp1xXt67vqqeZsVGd$$NzH7xcoc7rl55Owse_LP6##customer_id", "8GWpvp1xXt67vqqeZsVGd$$NzH7xcoc7rl55Owse_LP6##last_purchase_date", "8GWpvp1xXt67vqqeZsVGd$$NzH7xcoc7rl55Owse_LP6##spending" ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12654.git&subPath=&tag=0.2.39&projectSubscriptionProjectId=12654&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsPython"
+      }
+    },
+    "x9tQlGnivlYAq40TLZ8VF$$hzaIw0uC24lo0mB2PjC7R" : {
+      "id" : "x9tQlGnivlYAq40TLZ8VF$$hzaIw0uC24lo0mB2PjC7R",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "SchemaTransform_1",
+        "slug" : "SchemaTransform_1",
+        "x" : 40,
+        "y" : -200,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "autoUpdateComment" : true
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "0g97LOgpQMnEkqazTnaTC$$-G5c1KzU7TLQgzKUeA72A",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "customer_id",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "order_id",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "spending",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "last_purchase_date",
+              "type" : "date",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "high_value_flag",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "is_recent_order",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "34G_9cD9yFJMow01zQdrX$$Ib984NOjT3hBKMKo8FNbn",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "importLanguage" : "sql",
+        "importString" : "",
+        "transformations" : [ {
+          "AddRule" : {
+            "expression" : {
+              "format" : "sql",
+              "expression" : "PromoCodeRule()"
+            },
+            "param_errors" : [ {
+              "paramName" : "spending",
+              "hasError" : false
+            }, {
+              "paramName" : "high_value_flag",
+              "hasError" : false
+            }, {
+              "paramName" : "is_recent_order",
+              "hasError" : false
+            }, {
+              "paramName" : "last_purchase_date",
+              "hasError" : false
+            } ]
+          },
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "kind" : "AddRule",
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          },
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "expression" : "",
+              "format" : "python"
+            }
+          }
+        } ],
+        "activeTab" : "transformations",
+        "columnsSelector" : [ ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12654.git&subPath=&tag=0.2.39&projectSubscriptionProjectId=12654&path=gems/SchemaTransform",
+        "projectName" : "ProphecySparkBasicsPython"
+      }
+    }
+  },
   "ports" : {
     "inputs" : [ ],
     "outputs" : [ ],
